@@ -1,80 +1,55 @@
-// Assignment Code
+
 var generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
 
   // input for # of characters
-  var aNumber = Number(window.prompt("Type a number", ""));
-  console.log(`number:${aNumber}, datatype:${typeof (aNumber)}`);
-  //validate 8<=num<=128
-  while (aNumber < 8 || aNumber > 128) {
-    aNumber = Number(window.prompt("Choose a length of at least 8 and no more that 128 characters", ""));
-    console.log(`number:${aNumber}, datatype:${typeof (aNumber)}`);
+  var aNumber = Number(window.prompt("Type a number of length of your password", ""));
+  
+  //Check if it is not a number or less than 8 or greater than 128
+   while (isNaN(aNumber)|| aNumber < 8 || aNumber >= 128) {
+    aNumber = Number(window.prompt("Invalid ; Choose a length of at least 8 and no more that 128 characters", ""));
   }
-  //input for spectial chracter
-  var isSpecialCharInclude = Boolean(window.confirm("include Special Characters", ""));
-  console.log(isSpecialCharInclude);
+  //Include special character
+  var isSpecialCharInclude = Boolean(window.confirm("Include Special Characters", ""));
+  //Include lowercase
+  var isLowerCaseInclude = Boolean(window.confirm("Include lowercase", ""));
+  //Include Uppercase
+  var isUpperCaseInclude = Boolean(window.confirm("Include uppercase", ""));
+  //Include number
+  var isNumberInclude = Boolean(window.confirm("Include number", ""));
 
-  var isLowerCaseInclude = Boolean(window.confirm("include lowercase", ""));
-  console.log(isLowerCaseInclude);
-
-  var isUpperCaseInclude = Boolean(window.confirm("include uppercase", ""));
-  console.log(isUpperCaseInclude);
-
-  var isNumberInclude = Boolean(window.confirm("include number", ""));
-  console.log(isNumberInclude);
-
-  var passwordset_chars = "";
+  var passwordSet_chars = "";
   if (isSpecialCharInclude) {
-    // " !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
-    passwordset_chars=passwordset_chars.concat("!*+,-./:;<=>?@[^_");
-    console.log(passwordset_chars);
+    passwordSet_chars=passwordSet_chars.concat(" !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~");
   }
-
   if (isLowerCaseInclude) {
-    passwordset_chars = passwordset_chars.concat("abcdefghijklmnopqrstuvwxyz");
-    console.log(passwordset_chars);
+    passwordSet_chars = passwordSet_chars.concat("abcdefghijklmnopqrstuvwxyz");
   }
   if (isUpperCaseInclude) {
-    passwordset_chars = passwordset_chars.concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    console.log(passwordset_chars);
+    passwordSet_chars = passwordSet_chars.concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
   }
   if (isNumberInclude) {
-    passwordset_chars = passwordset_chars.concat("0123456789");
-    console.log(passwordset_chars);
+    passwordSet_chars = passwordSet_chars.concat("0123456789");
   }
   
-
-  var passwordLength = 12;
+  //randomly generate password
   var password = "";
   for (var i = 0; i <= aNumber; i++) {
-    var randomNumber = Math.floor(Math.random() * passwordset_chars.length);
-    console.log(`ramdomnum: ${randomNumber}`);
-    password += passwordset_chars.substring(randomNumber, randomNumber + 1);
-    console.log(`password: ${password}`);
+    var randomNumber = Math.floor(Math.random() * passwordSet_chars.length);
+    password += passwordSet_chars.substring(randomNumber, randomNumber + 1);
   }
-
   return password;
-
-
-
-
-
-
-
-
 }
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  //password;
+  if(password==""){
+    password="At least one character type should be selected\nclick 'Generate Password' again"
+  }
   var passwordText = document.querySelector("#password");
-
-
-
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
