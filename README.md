@@ -24,7 +24,7 @@ I want to randomly generate a password that meets certain criteria on my choice.
 ## Mock-Up
 
 The following image shows the web application's appearance and functionality:
-![The Password Generator application displays a red button to "Generate Password".](./Assets/images/03-javascript-homework-demo.png)
+![The Password Generator application displays a red button to "Generate Password".](./assets/images/03-javascript-homework-demo.png)
 ![Prompt for typing a length of password](./assets/images/Password-Generator.png)
 
 ## Reference
